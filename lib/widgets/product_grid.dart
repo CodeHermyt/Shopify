@@ -5,10 +5,12 @@ import 'package:shopify/providers/products_provider.dart';
 import 'package:shopify/widgets/product_item.dart';
 
 class ProductGrid extends StatelessWidget {
+  final bool showFavorites;
+  ProductGrid(this.showFavorites);
   @override
   Widget build(BuildContext context) {
     final productDatas = Provider.of<ProductsProvider>(context);
-    final products = productDatas.items;
+    final products = showFavorites? productDatas.favoritesonly: productDatas.items;
     return GridView.builder(
       padding: EdgeInsets.all(10),
       itemCount: products.length,
